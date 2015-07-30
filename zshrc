@@ -7,6 +7,9 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="ys"
 
+setopt RM_STAR_WAIT
+
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -77,6 +80,10 @@ export DOCKER_TLS_VERIFY=1
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR="vim"
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -96,4 +103,10 @@ alias rdb="rake db:drop db:create db:migrate db:fixtures:load"
 alias rtdb="RAILS_ENV=test rdb"
 alias mountfflinux07="sshfs deploy@fflinux07: /Users/hvs/Code/linux_mounts/"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+  export TERM='xterm-256color'
+else
+  export TERM='xterm-color'
+fi
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
